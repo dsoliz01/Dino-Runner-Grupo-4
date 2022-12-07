@@ -11,12 +11,13 @@ class Dinosuar(Sprite):
     def __init__(self):
         self.image = RUNNING[0]
         self.dino_rect = self.image.get_rect()
-        self.dino_duck_y = self.Y_POS_DUCK
         self.dino_rect.x = self.X_POS
         self.dino_rect.y = self.Y_POS
+        self.dino_duck = self.Y_POS_DUCK
+        self.reset_dino_rect()
         self.jump_velocity = self.JUMP_VELOCITY
         self.step_index= 0
-        self.running = False
+        self.running = True
         self.jumping = False
         self.ducking = False
 
@@ -46,6 +47,7 @@ class Dinosuar(Sprite):
 
     def run(self):
         self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1]
+        self.reset_dino_rect()
         self.step_index += 1
 
     def jump(self):
@@ -58,11 +60,16 @@ class Dinosuar(Sprite):
                 self.jump_velocity = self.JUMP_VELOCITY
 
     def duck(self):
-        self.image = DUCKING[0] if self.step_index < 10 else RUNNING[0]
-        self.dino_rect.x = self.X_POS
-        self.dino_duck_y = self.Y_POS_DUCK
+        self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]
+        self.reset_dino_rect()
+        self.dino_rect.x = self.X_POS -5
+        self.dino_rect.y = self.Y_POS_DUCK
         self.step_index += 1
-        
+
+    def reset_dino_rect(self):
+        self.dino_rect = self.image.get_rect()
+        self.dino_rect.x = self.X_POS
+        self.dino_rect.y = self.Y_POS
 
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
