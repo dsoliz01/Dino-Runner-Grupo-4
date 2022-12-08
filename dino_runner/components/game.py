@@ -36,6 +36,7 @@ class Game:
         # Game loop: events - update - draw
         self.playing = True
         self.obstacle_manager.reset_obstacles()
+        self.score.current_score = 0
         while self.playing:
             self.events()
             self.update()
@@ -77,6 +78,16 @@ class Game:
     def draw_score(self):
         pass
 
+    def place_text(self, font_sizes, pos_x, pos_y, text_message, color):
+        font = pygame.font.Font(FONT_STYLE, font_sizes)
+        text = font.render(text_message, True, color)
+        text_rect = text.get_rect()
+        text_rect.center = (pos_x, pos_y)
+        self.screen.blit(text, text_rect)
+
+
+
+
     def show_menu(self):
     # poner color al fondo
         self.screen.fill((225, 225, 225))
@@ -85,19 +96,24 @@ class Game:
         half_screen_width= SCREEN_WIDTH // 2
         half_screen_height = SCREEN_HEIGHT // 2
         if not self.death_count:
-            font = pygame.font.Font(FONT_STYLE, 22)
-            message = font.render('Press any key to start', True, (0, 0, 0))
-            message_rect = message.get_rect()
-            message_rect.center = (half_screen_width, half_screen_height)
-            self.screen.blit(message, message_rect)
-        else:
+            self.place_text(30, half_screen_width, half_screen_height, "PRESS A KEY TO START", (0, 0, 20))
             #tarea
-            #mostrar puntos obtenidos
+            
+        else:
             #mostrar mensaje de reinicio
-            #mostrar muertos totales
+            self.place_text(35, 550, 400, "PRESS A KEY TO PLAY AGAIN",(0, 0, 0))
+            #mostrar puntos obtenidos
+            self.place_text(22, 120, 50,f'MAX SCORE: {self.score.max_score}', (240, 0, 0))
+            #mostrar muertes totales
+            self.place_text(22, 120, 100, f'DEAHT COUNT: {self.death_count}', (240, 0, 0))
+
+            
+
+            
+            
             print(self.death_count)
     # mostrar imagen como icono
-        self.screen.blit(DINO_START, (half_screen_width - 20, half_screen_height -140))
+        self.screen.blit(DINO_START, (half_screen_width - 50, half_screen_height -140))
     # actualizar pantalla
         pygame.display.flip()
     # manejar eventos
