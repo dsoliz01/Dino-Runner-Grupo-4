@@ -18,16 +18,15 @@ class Score():
     def draw(self, screen):
         POS_MAX_SCORE_X = 700
         POS_MAX_SCORE_Y = 50
-        POS_SCORE_X = 970
+        POS_SCORE_X = 950
         POS_SCORE_Y = 50
         font = pygame.font.Font(FONT_STYLE, 30)
-        message = font.render(f'Score: {self.current_score}', True, (0, 0, 0))
+        message = font.render(f'Score: {self.current_score}', True, (160, 160, 160))
         message_rect = message.get_rect()
         message_rect.center = (POS_SCORE_X, POS_SCORE_Y)
         screen.blit(message, message_rect)
 
-        font = pygame.font.Font(FONT_STYLE, 30)
-        message = font.render(f'Max Score: {self.max_score}', True, (0, 0, 0))
+        message = font.render(f'Max Score: {self.max_score}', True, (160, 160, 160))
         message_rect = message.get_rect()
         message_rect.center = (POS_MAX_SCORE_X, POS_MAX_SCORE_Y)
         screen.blit(message, message_rect)
