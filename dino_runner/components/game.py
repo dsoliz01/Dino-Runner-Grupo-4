@@ -93,8 +93,6 @@ class Game:
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
 
-    def draw_score(self):
-        pass
 
     def place_text(self, font_sizes, pos_x, pos_y, text_message, color):
         font = pygame.font.Font(FONT_STYLE, font_sizes)
@@ -105,24 +103,25 @@ class Game:
 
     def show_menu(self):
     # poner color al fondo
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((51, 153, 255))
     # mostrar mensaje de inicio
         half_screen_width= SCREEN_WIDTH // 2
         half_screen_height = SCREEN_HEIGHT // 2
         if not self.death_count:
-            draw_message_component("PRESS A KEY TO GAME", self.screen)
-            self.screen.blit(CLOUD, (half_screen_width -100, half_screen_height - 100))
-            self.screen.blit(CLOUD, (half_screen_width +60, half_screen_height - 100))  
+            draw_message_component("PRESS A KEY TO GAME", self.screen, (0, 0, 0), 30, 350,550)
+            self.screen.blit(CLOUD, (600, 150))
+            self.screen.blit(CLOUD, (400, 200))  
             #tarea
         else:
             #mostrar mensaje de reinicio
-            self.place_text(35, 550, 400, "PRESS A KEY TO PLAY AGAIN",(0, 0, 0))
+            self.place_text(35, 550, 370, "PRESS A KEY TO PLAY AGAIN",(0, 0, 0))
             #mostrar puntos obtenidos
-            self.place_text(22, 120, 50,f'MAX SCORE: {self.score.max_score}', (240, 0, 0))
+            self.place_text(22, 120, 50,f'MAX SCORE: {self.score.max_score}', (255, 255, 255))
+            self.place_text(25, 550, 300,"GAME OVER", (255, 255, 255))
             #mostrar muertes totales
-            self.place_text(22, 120, 100, f'DEAHT COUNT: {self.death_count}', (240, 0, 0))
-            self.screen.blit(CLOUD, (half_screen_width -100, half_screen_height - 100))
-            self.screen.blit(CLOUD, (half_screen_width +60, half_screen_height - 100))   
+            self.place_text(22, 120, 100, f'DEAHT COUNT: {self.death_count}', (255, 255, 255))
+            self.screen.blit(CLOUD, (600, 150))
+            self.screen.blit(CLOUD, (400, 200))   
             
 
             
